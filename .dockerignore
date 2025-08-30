@@ -1,0 +1,5 @@
+//running yarn install so just not including node modules
+node_modules
+npm-debug.log
+Dockerfile
+.dockerignore
