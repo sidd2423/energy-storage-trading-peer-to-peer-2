@@ -1,25 +1,24 @@
-#This comman below uses node.js with yarn, nextjs is built on this node.js
-FROM node:20-alpine 
+FROM node:20-alpine
 
-#Setting working directory,i am using /usr/src/app because this is the source code of the app.
-#And to avoi cluttering of root directory.
 WORKDIR /usr/src/app
 
-# Copying dependency files first
+# Copy dependency files first
 COPY package.json yarn.lock ./
 
 # Install dependencies
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
-# Copying all source code including build/contracts
+# Copy the rest of the source code
 COPY . .
 
-# Expose the port your app runs on
-EXPOSE 3000
+# Build the Next.js app
+RUN yarn build
 
-# Starting the app in dev mode (for production,I will use yarn build && yarn start)
-CMD ["yarn", "dev"]
+# Cloud Run will set PORT=8080
+ENV PORT=8080
 
+# Expose the port Cloud Run expects
+EXPOSE 8080
 
-
-
+# Start the app in production mode
+CMD ["yarn", "start"]
