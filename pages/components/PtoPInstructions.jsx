@@ -160,7 +160,7 @@ class PtoPInstructions extends Component {
           <Row>
             <Col>
               <p>
-                Virtual Power Plant Contract Address:{" "}
+                Peer to Peer Contract Address:{" "}
                 <span id="PtoPContract">
                   {Web3Contracts?.contracts?.PtoP?.address || ""}
                 </span>
